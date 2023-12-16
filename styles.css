@@ -14,3 +14,17 @@ body {
 #message-el {
     font-style: italic;
 }
+
+button {
+    width: 150px;
+    background-color: goldenrod;
+    color: #016f32;
+    font-weight: bold;
+    border: none;
+    border-radius: 2px;
+    padding: 5px 0px;
+}
+
+#draw-card-btn {
+    display: none;
+}
