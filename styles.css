@@ -1,3 +1,16 @@
 h1 {
     color: goldenrod;
 }
+
+body {
+    text-align: center;
+    background-image: url("images/table.png");
+    background-size: cover;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+}
+
+#message-el {
+    font-style: italic;
+}
