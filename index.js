@@ -1,6 +1,5 @@
 let firstCard = 0
 let secondCard = 0
-let thirdCard = 0
 let cards = [
     0,
     0
@@ -13,6 +12,10 @@ let isALive = true
 let message = ""
 
 let messageEl = document.getElementById("message-el")
+
+function getRandomCard () {
+    return Math.floor(Math.random() * 20) + 1
+}
 
 function checkIfWin () {
     let cardsEl = document.getElementById("cards-el")
@@ -40,20 +43,19 @@ function checkIfWin () {
 }
 
 function drawCard () {
-    if (isALive === true) {
-        thirdCard = Math.floor(Math.random() * 20) + 1
-        cards.push(thirdCard)
-        console.log(cards)
-        sum += thirdCard // Add third card to the the sum
+    if(hasBlackJack == true) {
+        message = "You already won! You can play again if you want."
+        messageEl.innerText = message
+    }
+
+    else if (isALive === true) {
+        let card = getRandomCard()
+        cards.push(card) // Add the card to the list of cards
+        sum += card // Add the card to the the sum
         checkIfWin()
     }
     else if (isALive == false) {
         message = "You lost! Can't draw a new card. You can try playing again."
-        messageEl.innerText = message
-    }
-
-    if(hasBlackJack == true) {
-        message = "You already won! You can play again if you want."
         messageEl.innerText = message
     }
 }
@@ -63,8 +65,8 @@ function startGame () {
     hasBlackJack = false
 
     // Generating 2 cards
-    firstCard = Math.floor(Math.random() * 20) + 1
-    secondCard = Math.floor(Math.random() * 20) + 1
+    firstCard = getRandomCard()
+    secondCard = getRandomCard()
     
     cards = [firstCard, secondCard]
 
