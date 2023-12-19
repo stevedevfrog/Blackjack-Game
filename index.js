@@ -1,11 +1,4 @@
-let firstCard = 0
-let secondCard = 0
-let cards = [
-    0,
-    0
-]
-
-sum = firstCard + secondCard
+let cards = []
 
 let hasBlackJack = false
 let isALive = true
@@ -14,19 +7,24 @@ let message = ""
 let messageEl = document.getElementById("message-el")
 
 function getRandomCard () {
-    return Math.floor(Math.random() * 20) + 1
+    let randomCard = Math.floor( Math.random()*13 ) + 1 // 1-13
+    if (randomCard === 1) return 11 // 1 is Ace and it has a value of 11
+    else if (randomCard >= 11 & randomCard <= 13) return 10 // 11-13 are J, Q and K with value of 10
+    else return randomCard 
 }
 
 function checkIfWin () {
     let cardsEl = document.getElementById("cards-el")
     cardsText = "Cards: "
 
+    // Displaying the cards on the page
     for (let i = 0; i < cards.length; i++) {
         cardsText += cards[i] + ", "
     }
     
     cardsEl.innerText = cardsText
 
+    // Checking if the player won
     if (sum < 21) message = "Do you want to draw a new card?"
     else if (sum === 21) {
         message = "You won! You have a Blackjack! Congratulations!"
@@ -65,8 +63,8 @@ function startGame () {
     hasBlackJack = false
 
     // Generating 2 cards
-    firstCard = getRandomCard()
-    secondCard = getRandomCard()
+    let firstCard = getRandomCard()
+    let secondCard = getRandomCard()
     
     cards = [firstCard, secondCard]
 
