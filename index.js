@@ -1,5 +1,10 @@
-let firstCard = 4
-let secondCard = 6
+let firstCard = 0
+let secondCard = 0
+let thirdCard = 0
+let cards = [
+    0,
+    0
+]
 
 sum = firstCard + secondCard
 
@@ -7,7 +12,18 @@ let hasBlackJack = false
 let isALive = true
 let message = ""
 
+let messageEl = document.getElementById("message-el")
+
 function checkIfWin () {
+    let cardsEl = document.getElementById("cards-el")
+    cardsText = "Cards: "
+
+    for (let i = 0; i < cards.length; i++) {
+        cardsText += cards[i] + ", "
+    }
+    
+    cardsEl.innerText = cardsText
+
     if (sum < 21) message = "Do you want to draw a new card?"
     else if (sum === 21) {
         message = "You won! You have a Blackjack! Congratulations!"
@@ -17,25 +33,42 @@ function checkIfWin () {
         isALive = false
     }
 
-    messageEl = document.getElementById("message-el")
     messageEl.innerText = message
 
-    sumEl = document.getElementById("sum-el")
-    sumEl.innerText = sum
+    let sumEl = document.getElementById("sum-el")
+    sumEl.innerText = "Sum: " + sum
 }
 
 function drawCard () {
-    firstCard = Math.floor(Math.random() * 20) + 1;;
-    secondCard = Math.floor(Math.random() * 20) + 1;;
-    sum = firstCard + secondCard
+    if (isALive === true) {
+        thirdCard = Math.floor(Math.random() * 20) + 1
+        cards.push(thirdCard)
+        console.log(cards)
+        sum += thirdCard // Add third card to the the sum
+        checkIfWin()
+    }
+    else if (isALive == false) {
+        message = "You lost! Can't draw a new card. You can try playing again."
+        messageEl.innerText = message
+    }
 
-    cardsEl = document.getElementById("cards-el")
-    cardsEl.innerText = firstCard + " " + secondCard
-
-    checkIfWin()
+    if(hasBlackJack == true) {
+        message = "You already won! You can play again if you want."
+        messageEl.innerText = message
+    }
 }
 
 function startGame () {
-    console.log("The game is started!")
-    drawCard()
+    isALive = true
+    hasBlackJack = false
+
+    // Generating 2 cards
+    firstCard = Math.floor(Math.random() * 20) + 1
+    secondCard = Math.floor(Math.random() * 20) + 1
+    
+    cards = [firstCard, secondCard]
+
+    sum = firstCard + secondCard
+    
+    checkIfWin()
 }
