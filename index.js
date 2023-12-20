@@ -6,6 +6,16 @@ let message = ""
 
 let messageEl = document.getElementById("message-el")
 
+let playerEl = document.getElementById("player-el")
+
+let player = {
+    name: "Steve",
+    coins: 50,
+    showPlayerStats: function () {
+        playerEl.textContent = player.name + " $" + player.coins
+    }
+}
+
 function getRandomCard () {
     let randomCard = Math.floor( Math.random()*13 ) + 1 // 1-13
     if (randomCard === 1) return 11 // 1 is Ace and it has a value of 11
@@ -59,6 +69,9 @@ function drawCard () {
 }
 
 function startGame () {
+    player.showPlayerStats()
+    //console.log(player.coins)
+
     isALive = true
     hasBlackJack = false
 
